@@ -11,22 +11,39 @@ export type inputData = {
   subjects: Subject[];
 };
 
-export type SubjectsDistribution = {[terms: number]: Subject[]};
+export type SubjectsDistribution = Subject[][];
 
-const doesAllSubjectsDistrubuted = (currentDistribution: SubjectsDistribution, subjectsNumber: number): boolean => {
-  const addedSubjectsNum = Object.values(currentDistribution).reduce((sum, currentTerm) => sum + currentTerm.length, 0);
+const doesAllSubjectsDistrubuted = (
+  currentDistribution: SubjectsDistribution,
+  subjectsNumber: number,
+): boolean => {
+  const addedSubjectsNum = Object.values(currentDistribution).reduce(
+    (sum, currentTerm) => sum + currentTerm.length,
+    0,
+  );
   console.log(`=== doesAllSubjectsDistrubuted ${addedSubjectsNum}/${subjectsNumber}`);
   return addedSubjectsNum === subjectsNumber;
 };
 
-const getSumOfCreditsInTerm = (currentDistribution: SubjectsDistribution, termNumber: number): number => {
-  if (!currentDistribution[termNumber]) return 0;
-  const creditsSum = currentDistribution[termNumber].reduce((sum, subject) => sum + subject.credits, 0);
+const getSumOfCreditsInTerm = (
+  currentDistribution: SubjectsDistribution,
+  termNumber: number,
+): number => {
+  if (!currentDistribution[termNumber]) {
+    return 0;
+  }
+  const creditsSum = currentDistribution[termNumber].reduce(
+    (sum, subject) => sum + subject.credits,
+    0,
+  );
   console.log(`=== getSumOfCreditsInTerm ${creditsSum}: ${currentDistribution[termNumber]}`);
   return creditsSum;
 };
 
-const isSubjectDistributed = (currentDistribution: SubjectsDistribution, subjectName: string): boolean => {
+const isSubjectDistributed = (
+  currentDistribution: SubjectsDistribution,
+  subjectName: string,
+): boolean => {
   const result = Object.values(currentDistribution)
     .flat()
     .find((subject) => subject.name === subjectName);
@@ -36,9 +53,12 @@ const isSubjectDistributed = (currentDistribution: SubjectsDistribution, subject
 const areCompetencesFullfiled = (neededCompetentences: string[], competences: string[]): boolean =>
   neededCompetentences.every((elem) => competences.includes(elem));
 
-const getEarnedCompetences = (currentDistribution: SubjectsDistribution, currentTermNumber: number): string[] => {
+const getEarnedCompetences = (
+  currentDistribution: SubjectsDistribution,
+  currentTermNumber: number,
+): string[] => {
   let currentCompetences: string[] = [];
-  for (let i = 1; i < currentTermNumber; i++) {
+  for (let i = 0; i < currentTermNumber; i++) {
     currentCompetences = [
       ...currentCompetences,
       ...currentDistribution[i].map((subject) => subject.earnedCompetentences).flat(),
@@ -53,21 +73,27 @@ const findNextSubjectToDistribute = (
   currentTermNumber: number,
   maxCreditsInTerm: number,
 ): Subject | undefined => {
-  let currentCompetences: string[] = getEarnedCompetences(currentDistribution, currentTermNumber);
+  const currentCompetences: string[] = getEarnedCompetences(currentDistribution, currentTermNumber);
   return subjects.find(
     (subject) =>
       !isSubjectDistributed(currentDistribution, subject.name) &&
       areCompetencesFullfiled(subject.neededCompetentences, currentCompetences) &&
-      getSumOfCreditsInTerm(currentDistribution, currentTermNumber) + subject.credits <= maxCreditsInTerm,
+      getSumOfCreditsInTerm(currentDistribution, currentTermNumber) + subject.credits <=
+        maxCreditsInTerm,
   );
 };
 
-export const buildCurriculum = ({termsCount, maxCreditsInTerm, subjects}: inputData): SubjectsDistribution | null => {
+export const buildCurriculum = ({
+  termsCount,
+  maxCreditsInTerm,
+  subjects,
+}: inputData): SubjectsDistribution | null => {
   // temp data
-  let currentTermNumber = 1;
-  let currentDistribution: SubjectsDistribution = [];
+  let currentTermNumber = 0;
+  const currentDistribution: SubjectsDistribution = [];
+  console.log(currentDistribution);
   for (let i = 1; i <= termsCount; i++) {
-    currentDistribution[i] = [];
+    currentDistribution.push([]);
   }
 
   console.log(currentDistribution);
@@ -81,7 +107,7 @@ export const buildCurriculum = ({termsCount, maxCreditsInTerm, subjects}: inputD
       maxCreditsInTerm,
     );
     if (!nextSubjectToDistribute) {
-      if (currentTermNumber === termsCount) {
+      if (currentTermNumber + 1 === termsCount) {
         console.log(`=== max terms count, cannot add ${currentTermNumber}`);
         return null;
       }
@@ -90,7 +116,10 @@ export const buildCurriculum = ({termsCount, maxCreditsInTerm, subjects}: inputD
       continue;
     }
     console.log(`=== add subject ${nextSubjectToDistribute?.name} to term ${currentTermNumber}`);
-    currentDistribution[currentTermNumber] = [...currentDistribution[currentTermNumber], nextSubjectToDistribute];
+    currentDistribution[currentTermNumber] = [
+      ...currentDistribution[currentTermNumber],
+      nextSubjectToDistribute,
+    ];
   }
 
   return currentDistribution;

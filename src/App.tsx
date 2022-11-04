@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {buildCurriculum} from './utils/buildCurriculum';
 
@@ -62,15 +61,17 @@ const App: React.FC = () => {
       credits: 2,
     },
   ];
-  const result = buildCurriculum({termsCount: 3, maxCreditsInTerm: 10, subjects: subjects});
+  const result = buildCurriculum({termsCount: 3, maxCreditsInTerm: 10, subjects});
+
+  const strResult = result ? JSON.stringify(result, null, 4) : '';
+  const strInput = JSON.stringify(subjects, null, 4);
 
   console.log(result);
-  alert(JSON.stringify(subjects, null, 4));
-  alert(result ? JSON.stringify(result, null, 4) : '');
 
   return (
     <div className="App">
-        <p>{result ? JSON.stringify(result, null, 4) : ''}</p>
+      <p id="input">{strInput}</p>
+      <p id="result">{strResult}</p>
     </div>
   );
 };

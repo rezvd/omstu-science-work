@@ -4,10 +4,14 @@
   color: white;
   min-height: 100vh;
   padding: 20px;
+  display: flex;
+  flex-direction: row;
 }
 
 p {
   margin: 0;
+  white-space: pre;
+  min-width: 50vw;
 }
 
 .App-header {
