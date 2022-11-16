@@ -1,8 +1,23 @@
+import {makeStyles} from '@material-ui/core';
 import React from 'react';
+import {Routes, Route, BrowserRouter, Navigate} from 'react-router-dom';
 import './App.css';
+import {colors} from './styles/colors';
+import DepsPage from './pages/deps-page/DepsPage';
+import ParamsPage from './pages/params-page/ParamsPage';
+import ResultsPage from './pages/result-page/ResultPage';
+import StartPage from './pages/start-page/StartPage';
 import {buildCurriculum} from './utils/buildCurriculum';
 
+const useStyles = makeStyles(() => ({
+  container: {
+    backgroundColor: colors.background,
+    maxWidth: '100%',
+  },
+}));
+
 const App: React.FC = () => {
+  const classes = useStyles();
   const subjects = [
     {
       name: '7',
@@ -69,10 +84,19 @@ const App: React.FC = () => {
   console.log(result);
 
   return (
-    <div className="App">
-      <p id="input">{strInput}</p>
-      <p id="result">{strResult}</p>
-    </div>
+    <BrowserRouter>
+      <div className={classes.container}>
+        {/* <p id="input">{strInput}</p>
+      <p id="result">{strResult}</p> */}
+        <Routes>
+          <Route path="/" element={<StartPage />} />
+          <Route path="/params" element={<ParamsPage />} />
+          <Route path="/deps" element={<DepsPage />} />
+          <Route path="/result" element={<ResultsPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 };
 
