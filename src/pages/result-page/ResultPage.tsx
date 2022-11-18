@@ -1,4 +1,5 @@
 import {Theme, makeStyles} from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 import BaseLayout from '../../components/base-layout/BaseLayout';
 
 const useStyles = makeStyles(({palette, spacing}: Theme) => ({
@@ -9,6 +10,7 @@ const useStyles = makeStyles(({palette, spacing}: Theme) => ({
 
 const ResultsPage: React.FC = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
   //   const dispatch = useDispatch();
   //   const company: string = useSelector((state: any) => state.companySettings.shortname);
 

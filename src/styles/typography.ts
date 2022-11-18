@@ -9,34 +9,34 @@ export const typography = {
   h1: {
     ...defaultTextStyles,
     fontWeight: 700,
-    fontSize: '48px',
+    fontSize: '40px',
     marginBottom: '26px',
   },
   h2: {
     ...defaultTextStyles,
     fontWeight: 700,
-    fontSize: '36px',
+    fontSize: '32px',
     marginBottom: '18px',
   },
   h3: {
     ...defaultTextStyles,
     fontWeight: 700,
-    fontSize: '32px',
+    fontSize: '24px',
   },
   h4: {
     ...defaultTextStyles,
     fontWeight: 700,
-    fontSize: '24px',
+    fontSize: '16px',
   },
   h5: {
     ...defaultTextStyles,
     fontWeight: 700,
-    fontSize: '16px',
+    fontSize: '14px',
   },
   text: {
     ...defaultTextStyles,
     fontWeight: 400,
-    fontSize: '24px',
+    fontSize: '18px',
   },
   smallText: {
     ...defaultTextStyles,

@@ -1,21 +1,25 @@
-import {Theme, makeStyles} from '@material-ui/core';
+import {Theme, makeStyles, Button} from '@material-ui/core';
+import {useNavigate} from 'react-router-dom';
 import BaseLayout from '../../components/base-layout/BaseLayout';
 import {typography} from '../../styles/typography';
 
 const useStyles = makeStyles(({palette, spacing}: Theme) => ({
-  container: {
-    padding: '72px 70px 70px 70px',
-  },
   title: {
     ...typography.h1,
   },
   text: {
     ...typography.text,
   },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: 70,
+  },
 }));
 
 const StartPage: React.FC = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
   //   const dispatch = useDispatch();
   //   const company: string = useSelector((state: any) => state.companySettings.shortname);
 
@@ -29,6 +33,11 @@ const StartPage: React.FC = () => {
         учётом ограничений на количество зачётных единиц в семестр и ограничений на покрытие дисциплин
         компетенциями.
       </p>
+      <div className={classes.buttonContainer}>
+        <Button variant="contained" onClick={() => navigate('/params')}>
+          Далее
+        </Button>
+      </div>
     </BaseLayout>
   );
 };

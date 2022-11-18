@@ -1,7 +1,6 @@
 import {makeStyles} from '@material-ui/core';
 import React from 'react';
 import {Routes, Route, BrowserRouter, Navigate} from 'react-router-dom';
-import './App.css';
 import {colors} from './styles/colors';
 import DepsPage from './pages/deps-page/DepsPage';
 import ParamsPage from './pages/params-page/ParamsPage';
