@@ -1,9 +1,13 @@
 import {Theme, makeStyles, TextField, Button, IconButton} from '@material-ui/core';
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import {Subject} from '../../typings/typings';
+import {useAppDispatch} from '../../redux/hooks/useAppDispatch';
+import {useAppSelector} from '../../redux/hooks/useAppSelector';
+import {updateCurriculumAction} from '../../redux/actions/updateCurriculumAction';
 import BaseLayout from '../../components/base-layout/BaseLayout';
 import QuestionTooltip from '../../components/QuestionTooltip/QuestionTooltip';
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import {typography} from '../../styles/typography';
 
 const useStyles = makeStyles(({palette, spacing}: Theme) => ({
@@ -41,10 +45,19 @@ const useStyles = makeStyles(({palette, spacing}: Theme) => ({
     ...typography.h2,
     marginBottom: 30,
   },
-  textInput: {
+  textInputSubjects: {
+    width: '60%',
+    marginRight: 15,
+    marginBottom: 30,
+  },
+  textInputCompetences: {
     width: '80%',
     marginRight: 15,
     marginBottom: 30,
+  },
+  creditsNumberInput: {
+    width: 70,
+    marginRight: 5,
   },
   listItem: {
     ...typography.text,
@@ -63,50 +76,65 @@ const useStyles = makeStyles(({palette, spacing}: Theme) => ({
 const ParamsPage: React.FC = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  //   const dispatch = useDispatch();
-  //   const company: string = useSelector((state: any) => state.companySettings.shortname);
+  const dispatch = useAppDispatch();
 
-  const [termNumber, setTermsNumber] = useState(8);
-  const [maxCredits, setMaxCredits] = useState(200);
+  const competences = useAppSelector((state) => state.curriculum.competences);
+  const subjects = useAppSelector((state) => state.curriculum.subjects);
+  const maxCreditsInTerm = useAppSelector((state) => state.curriculum.maxCreditsInTerm);
+  const termsNumber = useAppSelector((state) => state.curriculum.termsNumber);
 
   const [tempSubject, setTemSubject] = useState('');
-  const [subjects, setSubjects] = useState<string[]>([]);
-
-  const [tempCompentence, setTermCompentence] = useState('');
-  const [compentences, setCompentences] = useState<string[]>([]);
+  const [tempCompetence, setTermCompetence] = useState('');
+  const [tempCredits, setTempCredits] = useState(1);
 
   const onTermsNumberChange = (e: any) => {
     const value = Number(e.currentTarget.value);
     if (value >= 1 && value <= 20) {
-      setTermsNumber(value);
+      dispatch(updateCurriculumAction({termsNumber: value}));
     }
   };
 
   const onMaxCreditsChange = (e: any) => {
     const value = Number(e.currentTarget.value);
     if (value >= 1 && value <= 2000) {
-      setMaxCredits(value);
+      dispatch(updateCurriculumAction({maxCreditsInTerm: value}));
+    }
+  };
+
+  const onTempCreditsChange = (e: any) => {
+    const value = Number(e.currentTarget.value);
+    if (value >= 0 && value <= 100) {
+      setTempCredits(value);
     }
   };
 
   const addSubject = () => {
-    setSubjects([...subjects, tempSubject]);
+    const newSubject: Subject = {
+      name: tempSubject,
+      neededCompetentences: [],
+      earnedCompetentences: [],
+      credits: tempCredits,
+    };
+    dispatch(updateCurriculumAction({subjects: [...subjects, newSubject]}));
     setTemSubject('');
+    setTempCredits(0);
   };
 
   const addCompetence = () => {
-    setCompentences([...compentences, tempCompentence]);
-    setTermCompentence('');
+    dispatch(updateCurriculumAction({competences: [...competences, tempCompetence]}));
+    setTermCompetence('');
   };
 
   const renderSubjects = () =>
     subjects.map((subject, index) => (
-      <p key={subject} className={classes.listItem}>{`${index + 1}. ${subject}`}</p>
+      <p key={subject.name} className={classes.listItem}>{`${index + 1}. ${subject.name}, ${
+        subject.credits
+      } з.е.`}</p>
     ));
 
   const renderCompetences = () =>
-    compentences.map((subject, index) => (
-      <p key={subject} className={classes.listItem}>{`${index + 1}. ${subject}`}</p>
+    competences.map((competence, index) => (
+      <p key={competence} className={classes.listItem}>{`${index + 1}. ${competence}`}</p>
     ));
 
   return (
@@ -119,7 +147,7 @@ const ParamsPage: React.FC = () => {
         <TextField
           className={classes.numberInput}
           type="number"
-          value={termNumber}
+          value={termsNumber}
           onChange={onTermsNumberChange}
           variant="standard"
         />
@@ -130,7 +158,7 @@ const ParamsPage: React.FC = () => {
         <TextField
           className={classes.numberInput}
           type="number"
-          value={maxCredits}
+          value={maxCreditsInTerm}
           onChange={onMaxCreditsChange}
           variant="standard"
         />
@@ -142,11 +170,19 @@ const ParamsPage: React.FC = () => {
           <p className={classes.titleh2}>Дисциплины</p>
           <div>
             <TextField
-              className={classes.textInput}
+              className={classes.textInputSubjects}
               value={tempSubject}
               onChange={(e) => setTemSubject(e.currentTarget.value)}
               variant="outlined"
               placeholder="Введите название дисциплины"
+            />
+            <TextField
+              className={classes.creditsNumberInput}
+              type="number"
+              value={tempCredits}
+              onChange={onTempCreditsChange}
+              variant="outlined"
+              label="з.е."
             />
             <IconButton onClick={addSubject} disabled={tempSubject.length === 0}>
               <ControlPointIcon fontSize="large" />
@@ -160,13 +196,13 @@ const ParamsPage: React.FC = () => {
           <p className={classes.titleh2}>Компетенции</p>
           <div>
             <TextField
-              className={classes.textInput}
-              value={tempCompentence}
-              onChange={(e) => setTermCompentence(e.currentTarget.value)}
+              className={classes.textInputCompetences}
+              value={tempCompetence}
+              onChange={(e) => setTermCompetence(e.currentTarget.value)}
               variant="outlined"
               placeholder="Введите название компетенции"
             />
-            <IconButton onClick={addCompetence} disabled={tempCompentence.length === 0}>
+            <IconButton onClick={addCompetence} disabled={tempCompetence.length === 0}>
               <ControlPointIcon fontSize="large" />
             </IconButton>
           </div>
