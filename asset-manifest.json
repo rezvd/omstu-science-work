@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/omstu-science-work/static/css/main.dc66274a.css",
+    "main.js": "/omstu-science-work/static/js/main.3565f758.js",
+    "static/js/787.bdb36c69.chunk.js": "/omstu-science-work/static/js/787.bdb36c69.chunk.js",
+    "index.html": "/omstu-science-work/index.html",
+    "main.dc66274a.css.map": "/omstu-science-work/static/css/main.dc66274a.css.map",
+    "main.3565f758.js.map": "/omstu-science-work/static/js/main.3565f758.js.map",
+    "787.bdb36c69.chunk.js.map": "/omstu-science-work/static/js/787.bdb36c69.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dc66274a.css",
+    "static/js/main.3565f758.js"
+  ]
+}
