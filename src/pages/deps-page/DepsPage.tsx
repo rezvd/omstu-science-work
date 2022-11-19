@@ -2,6 +2,7 @@ import {makeStyles, Button, Grid, GridSize} from '@material-ui/core';
 import {useNavigate} from 'react-router-dom';
 import Expandable from '../../components/accordion/Expandable';
 import BaseLayout from '../../components/base-layout/BaseLayout';
+import QuestionTooltip from '../../components/QuestionTooltip/QuestionTooltip';
 import {useAppSelector} from '../../redux/hooks/useAppSelector';
 import {colors} from '../../styles/colors';
 import {typography} from '../../styles/typography';
@@ -109,11 +110,17 @@ const DepsPage: React.FC = () => {
           </Grid>
           <Grid item xs={columsSizes[1]}>
             <p className={classes.titleh3}>Компетенции необходимые</p>
-            <p className={classes.titleh4}>для изучения данной дисциплины</p>
+            <div style={{display: 'flex', flexDirection: 'row'}}>
+              <p className={classes.titleh4}>для изучения данной дисциплины</p>
+              <QuestionTooltip tooltipText="В этом столбце необходимо указать компетенции, которыми нужно овладеть до изучения данной дисциплины" />
+            </div>
           </Grid>
           <Grid item xs={columsSizes[2]}>
             <p className={classes.titleh3}>Компетенции приобретаемые</p>
-            <p className={classes.titleh4}>в ходе изучения данной дисциплины</p>
+            <div style={{display: 'flex', flexDirection: 'row'}}>
+              <p className={classes.titleh4}>в ходе изучения данной дисциплины</p>
+              <QuestionTooltip tooltipText="В этом столбце необходимо указать компетенции, которые студент получит после изучения данной дисциплины" />
+            </div>
           </Grid>
         </Grid>
 
@@ -124,7 +131,7 @@ const DepsPage: React.FC = () => {
         <Button variant="contained" onClick={() => navigate('/params')} style={{marginRight: 20}}>
           Назад
         </Button>
-        <Button variant="contained" onClick={() => navigate('/result')}>
+        <Button variant="contained" color="primary" onClick={() => navigate('/result')}>
           Далее
         </Button>
       </div>

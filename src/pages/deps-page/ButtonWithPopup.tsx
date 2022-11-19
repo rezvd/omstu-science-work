@@ -58,7 +58,7 @@ const ButtonWithPopup: React.FC<Props> = ({subject, competenceType}) => {
 
   const renderListItem = (competence: string) => (
     <div className={classes.itemContainer} onClick={() => onItemClick(competence)}>
-      <Checkbox edge="start" checked={subject[competenceType].includes(competence)} />
+      <Checkbox color="primary" checked={subject[competenceType].includes(competence)} />
       <p>{competence}</p>
     </div>
   );

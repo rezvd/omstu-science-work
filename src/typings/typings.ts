@@ -6,7 +6,7 @@ export type Subject = {
 };
 
 export type inputData = {
-  termsCount: number;
+  termsNumber: number;
   maxCreditsInTerm: number;
   subjects: Subject[];
 };

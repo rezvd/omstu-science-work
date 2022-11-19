@@ -71,7 +71,7 @@ const findNextSubjectToDistribute = (
 };
 
 export const buildCurriculum = ({
-  termsCount,
+  termsNumber,
   maxCreditsInTerm,
   subjects,
 }: inputData): SubjectsDistribution | null => {
@@ -79,7 +79,7 @@ export const buildCurriculum = ({
   let currentTermNumber = 0;
   const currentDistribution: SubjectsDistribution = [];
   console.log(currentDistribution);
-  for (let i = 1; i <= termsCount; i++) {
+  for (let i = 1; i <= termsNumber; i++) {
     currentDistribution.push([]);
   }
 
@@ -94,7 +94,7 @@ export const buildCurriculum = ({
       maxCreditsInTerm,
     );
     if (!nextSubjectToDistribute) {
-      if (currentTermNumber + 1 === termsCount) {
+      if (currentTermNumber + 1 === termsNumber) {
         console.log(`=== max terms count, cannot add ${currentTermNumber}`);
         return null;
       }

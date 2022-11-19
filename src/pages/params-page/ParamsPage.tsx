@@ -138,11 +138,11 @@ const ParamsPage: React.FC = () => {
 
   return (
     <BaseLayout currentStep={1}>
-      <p className={classes.title}>Описание</p>
+      <p className={classes.title}>Ввод параметров и ограничений</p>
       {/*   ===   number inputs part   ===   */}
       <div className={classes.numberInputContainer}>
         <p className={classes.inputText}>Количество семестров</p>
-        <QuestionTooltip />
+        <QuestionTooltip tooltipText="Количество семестров в вашем учебном плане" />
         <TextField
           className={classes.numberInput}
           type="number"
@@ -153,7 +153,7 @@ const ParamsPage: React.FC = () => {
       </div>
       <div className={classes.numberInputContainer}>
         <p className={classes.inputText}>Максимальное количество зачётных единиц в семестре</p>
-        <QuestionTooltip />
+        <QuestionTooltip tooltipText="Ограничение по количеству зачётных единиц в семестре" />
         <TextField
           className={classes.numberInput}
           type="number"
@@ -173,7 +173,7 @@ const ParamsPage: React.FC = () => {
               value={tempSubject}
               onChange={(e) => setTemSubject(e.currentTarget.value)}
               variant="outlined"
-              placeholder="Введите название дисциплины"
+              placeholder="Название дисциплины"
             />
             <TextField
               className={classes.creditsNumberInput}
@@ -201,7 +201,7 @@ const ParamsPage: React.FC = () => {
               value={tempCompetence}
               onChange={(e) => setTermCompetence(e.currentTarget.value)}
               variant="outlined"
-              placeholder="Введите название компетенции"
+              placeholder="Название компетенции"
             />
             <IconButton
               icon={Icons.create}
@@ -216,7 +216,7 @@ const ParamsPage: React.FC = () => {
         <Button variant="contained" onClick={() => navigate('/start')} style={{marginRight: 20}}>
           Назад
         </Button>
-        <Button variant="contained" onClick={() => navigate('/deps')}>
+        <Button variant="contained" color="primary" onClick={() => navigate('/deps')}>
           Далее
         </Button>
       </div>
