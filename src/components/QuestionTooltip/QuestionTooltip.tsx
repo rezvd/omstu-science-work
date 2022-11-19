@@ -1,8 +1,8 @@
-import {Theme, makeStyles, Tooltip} from '@material-ui/core';
+import {makeStyles, Tooltip} from '@material-ui/core';
 import {colors} from '../../styles/colors';
 import {typography} from '../../styles/typography';
 
-const useStyles = makeStyles(({palette, spacing}: Theme) => ({
+const useStyles = makeStyles(() => ({
   tooltip: {
     margin: '0 18px',
     width: 18,

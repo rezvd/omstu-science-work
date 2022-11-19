@@ -1,8 +1,8 @@
-import {Theme, makeStyles, Button} from '@material-ui/core';
+import {makeStyles, Button} from '@material-ui/core';
 import {useNavigate} from 'react-router-dom';
 import BaseLayout from '../../components/base-layout/BaseLayout';
 
-const useStyles = makeStyles(({palette, spacing}: Theme) => ({
+const useStyles = makeStyles(() => ({
   /*   ===   next button   ===   */
   buttonContainer: {
     display: 'flex',

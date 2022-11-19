@@ -6,7 +6,6 @@ import DepsPage from './pages/deps-page/DepsPage';
 import ParamsPage from './pages/params-page/ParamsPage';
 import ResultsPage from './pages/result-page/ResultPage';
 import StartPage from './pages/start-page/StartPage';
-import {buildCurriculum} from './utils/buildCurriculum';
 import {Provider} from 'react-redux';
 import {store} from './redux/store';
 

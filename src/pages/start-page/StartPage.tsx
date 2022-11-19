@@ -1,9 +1,9 @@
-import {Theme, makeStyles, Button} from '@material-ui/core';
+import {makeStyles, Button} from '@material-ui/core';
 import {useNavigate} from 'react-router-dom';
 import BaseLayout from '../../components/base-layout/BaseLayout';
 import {typography} from '../../styles/typography';
 
-const useStyles = makeStyles(({palette, spacing}: Theme) => ({
+const useStyles = makeStyles(() => ({
   title: {
     ...typography.h1,
   },

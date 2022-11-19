@@ -1,7 +1,6 @@
-import {Theme, makeStyles, TextField, Button, IconButton} from '@material-ui/core';
+import {makeStyles, TextField, Button} from '@material-ui/core';
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import {Subject} from '../../typings/typings';
 import {useAppDispatch} from '../../redux/hooks/useAppDispatch';
 import {useAppSelector} from '../../redux/hooks/useAppSelector';
@@ -9,8 +8,9 @@ import {updateCurriculumAction} from '../../redux/actions/updateCurriculumAction
 import BaseLayout from '../../components/base-layout/BaseLayout';
 import QuestionTooltip from '../../components/QuestionTooltip/QuestionTooltip';
 import {typography} from '../../styles/typography';
+import IconButton, {Icons} from '../../components/iconButton/IconButton';
 
-const useStyles = makeStyles(({palette, spacing}: Theme) => ({
+const useStyles = makeStyles(() => ({
   title: {
     ...typography.h1,
   },
@@ -57,7 +57,6 @@ const useStyles = makeStyles(({palette, spacing}: Theme) => ({
   },
   creditsNumberInput: {
     width: 70,
-    marginRight: 5,
   },
   listItem: {
     ...typography.text,
@@ -184,9 +183,11 @@ const ParamsPage: React.FC = () => {
               variant="outlined"
               label="з.е."
             />
-            <IconButton onClick={addSubject} disabled={tempSubject.length === 0}>
-              <ControlPointIcon fontSize="large" />
-            </IconButton>
+            <IconButton
+              icon={Icons.create}
+              onClick={addSubject}
+              disabled={tempSubject.length === 0}
+            />
           </div>
           {renderSubjects()}
         </div>
@@ -202,9 +203,11 @@ const ParamsPage: React.FC = () => {
               variant="outlined"
               placeholder="Введите название компетенции"
             />
-            <IconButton onClick={addCompetence} disabled={tempCompetence.length === 0}>
-              <ControlPointIcon fontSize="large" />
-            </IconButton>
+            <IconButton
+              icon={Icons.create}
+              onClick={addCompetence}
+              disabled={tempCompetence.length === 0}
+            />
           </div>
           {renderCompetences()}
         </div>

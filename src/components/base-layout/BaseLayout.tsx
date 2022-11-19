@@ -1,7 +1,7 @@
-import {Theme, makeStyles, Stepper, Step, StepLabel} from '@material-ui/core';
+import {makeStyles, Stepper, Step, StepLabel} from '@material-ui/core';
 import {useNavigate} from 'react-router-dom';
 
-const useStyles = makeStyles(({palette, spacing}: Theme) => ({
+const useStyles = makeStyles(() => ({
   container: {
     minWidth: 800,
     maxWidth: 1200,
