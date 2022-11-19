@@ -1,10 +1,13 @@
-import {Theme, makeStyles} from '@material-ui/core';
-import { useNavigate } from 'react-router-dom';
+import {Theme, makeStyles, Button} from '@material-ui/core';
+import {useNavigate} from 'react-router-dom';
 import BaseLayout from '../../components/base-layout/BaseLayout';
 
 const useStyles = makeStyles(({palette, spacing}: Theme) => ({
-  container: {
-    padding: '72px 70px 70px 70px',
+  /*   ===   next button   ===   */
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: 70,
   },
 }));
 
@@ -17,6 +20,15 @@ const ResultsPage: React.FC = () => {
   return (
     <BaseLayout currentStep={3}>
       <p>New page</p>
+
+      <div className={classes.buttonContainer}>
+        <Button variant="contained" onClick={() => navigate('/deps')} style={{marginRight: 20}}>
+          Назад
+        </Button>
+        <Button variant="contained" onClick={() => navigate('/start')}>
+          К началу
+        </Button>
+      </div>
     </BaseLayout>
   );
 };

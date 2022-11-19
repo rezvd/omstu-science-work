@@ -210,6 +210,9 @@ const ParamsPage: React.FC = () => {
         </div>
       </div>
       <div className={classes.buttonContainer}>
+        <Button variant="contained" onClick={() => navigate('/start')} style={{marginRight: 20}}>
+          Назад
+        </Button>
         <Button variant="contained" onClick={() => navigate('/deps')}>
           Далее
         </Button>

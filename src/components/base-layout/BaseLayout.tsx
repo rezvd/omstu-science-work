@@ -1,4 +1,5 @@
 import {Theme, makeStyles, Stepper, Step, StepLabel} from '@material-ui/core';
+import {useNavigate} from 'react-router-dom';
 
 const useStyles = makeStyles(({palette, spacing}: Theme) => ({
   container: {
@@ -10,7 +11,10 @@ const useStyles = makeStyles(({palette, spacing}: Theme) => ({
     padding: '30px 70px',
   },
   stepper: {
-    marginTop: '50px',
+    padding: '30px 70px',
+  },
+  stepLabel: {
+    cursor: 'pointer',
   },
 }));
 
@@ -21,15 +25,35 @@ type Props = {
 
 const BaseLayout: React.FC<Props> = ({currentStep, children}) => {
   const classes = useStyles();
+  const navigate = useNavigate();
 
-  const steps = ['Начало', 'Общие параметры', 'Установление зависимостей', 'Готово!'];
+  const steps = [
+    {
+      label: 'Начало',
+      onClick: () => navigate('/start'),
+    },
+    {
+      label: 'Общие параметры',
+      onClick: () => navigate('/params'),
+    },
+    {
+      label: 'Установление зависимостей',
+      onClick: () => navigate('/deps'),
+    },
+    {
+      label: 'Готово!',
+      onClick: () => navigate('/result'),
+    },
+  ];
 
   return (
     <div className={classes.container}>
-      <Stepper activeStep={currentStep} className={classes.stepper} alternativeLabel>
-        {steps.map((label) => (
+      <Stepper activeStep={currentStep} className={classes.stepper}>
+        {steps.map(({label, onClick}) => (
           <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+            <StepLabel onClick={onClick} className={classes.stepLabel}>
+              {label}
+            </StepLabel>
           </Step>
         ))}
       </Stepper>
