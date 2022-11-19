@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core';
 import React from 'react';
-import {Routes, Route, BrowserRouter, Navigate} from 'react-router-dom';
+import {Routes, Route, Navigate, HashRouter} from 'react-router-dom';
 import {colors} from './styles/colors';
 import DepsPage from './pages/deps-page/DepsPage';
 import ParamsPage from './pages/params-page/ParamsPage';
@@ -21,10 +21,8 @@ const App: React.FC = () => {
 
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <div className={classes.container}>
-          {/* <p id="input">{strInput}</p>
-      <p id="result">{strResult}</p> */}
           <Routes>
             <Route path="/" element={<StartPage />} />
             <Route path="/params" element={<ParamsPage />} />
@@ -33,7 +31,7 @@ const App: React.FC = () => {
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   );
 };
