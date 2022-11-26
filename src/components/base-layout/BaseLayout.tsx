@@ -1,4 +1,5 @@
 import {makeStyles, Stepper, Step, StepLabel} from '@material-ui/core';
+import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
@@ -12,6 +13,7 @@ const useStyles = makeStyles(() => ({
   },
   stepper: {
     padding: '30px 70px',
+    backgroundColor: 'transparent',
   },
   stepLabel: {
     cursor: 'pointer',
@@ -29,31 +31,38 @@ const BaseLayout: React.FC<Props> = ({currentStep, children}) => {
 
   const steps = [
     {
-      label: 'Начало',
+      label: 'Старт',
+      title: 'Старт',
       onClick: () => navigate('/start'),
     },
     {
       label: 'Общие параметры',
+      title: 'Параметры',
       onClick: () => navigate('/params'),
     },
     {
       label: 'Установление зависимостей',
+      title: 'Зависимости',
       onClick: () => navigate('/deps'),
     },
     {
       label: 'Готово!',
+      title: 'Результат',
       onClick: () => navigate('/result'),
     },
   ];
+
+  useEffect(() => {
+    document.title = `Учебный план | ${steps[currentStep].title}`;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentStep]);
 
   return (
     <div className={classes.container}>
       <Stepper activeStep={currentStep} className={classes.stepper}>
         {steps.map(({label, onClick}) => (
-          <Step key={label}>
-            <StepLabel onClick={onClick} className={classes.stepLabel}>
-              {label}
-            </StepLabel>
+          <Step key={label} onClick={onClick} className={classes.stepLabel}>
+            <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>

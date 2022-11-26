@@ -1,5 +1,5 @@
 import {makeStyles, Popover, Checkbox} from '@material-ui/core';
-import IconButton, {Icons} from '../../components/iconButton/IconButton';
+import IconButton, {Icons} from '../../components/icon-button/IconButton';
 import {useState} from 'react';
 import {Subject} from '../../typings/typings';
 import {useAppSelector} from '../../redux/hooks/useAppSelector';

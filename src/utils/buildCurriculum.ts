@@ -75,6 +75,9 @@ export const buildCurriculum = ({
   maxCreditsInTerm,
   subjects,
 }: inputData): SubjectsDistribution | null => {
+  if (subjects.length === 0) {
+    return null;
+  }
   // temp data
   let currentTermNumber = 0;
   const currentDistribution: SubjectsDistribution = [];

@@ -1,7 +1,7 @@
 import {makeStyles, Button} from '@material-ui/core';
 import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import Expandable from '../../components/accordion/Expandable';
+import Expandable from '../../components/expandable/Expandable';
 import BaseLayout from '../../components/base-layout/BaseLayout';
 import {useAppSelector} from '../../redux/hooks/useAppSelector';
 import {typography} from '../../styles/typography';
@@ -37,7 +37,7 @@ const ResultsPage: React.FC = () => {
   const maxCreditsInTerm = useAppSelector((state) => state.curriculum.maxCreditsInTerm);
   const termsNumber = useAppSelector((state) => state.curriculum.termsNumber);
 
-  const [curriculum, setCurriculum] = useState<SubjectsDistribution | null>([]);
+  const [curriculum, setCurriculum] = useState<SubjectsDistribution | null>(null);
 
   const renderTerm = (term: Subject[], termNumber: number) => (
     <Expandable header={<p>{`Семестр ${termNumber + 1}`}</p>} classname={classes.term}>

@@ -6,9 +6,9 @@ import {useAppDispatch} from '../../redux/hooks/useAppDispatch';
 import {useAppSelector} from '../../redux/hooks/useAppSelector';
 import {updateCurriculumAction} from '../../redux/actions/updateCurriculumAction';
 import BaseLayout from '../../components/base-layout/BaseLayout';
-import QuestionTooltip from '../../components/QuestionTooltip/QuestionTooltip';
+import QuestionTooltip from '../../components/question-tooltip/QuestionTooltip';
 import {typography} from '../../styles/typography';
-import IconButton, {Icons} from '../../components/iconButton/IconButton';
+import IconButton, {Icons} from '../../components/icon-button/IconButton';
 
 const useStyles = makeStyles(() => ({
   title: {

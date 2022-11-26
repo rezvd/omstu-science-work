@@ -1,8 +1,8 @@
 import {makeStyles, Button, Grid, GridSize} from '@material-ui/core';
 import {useNavigate} from 'react-router-dom';
-import Expandable from '../../components/accordion/Expandable';
+import Expandable from '../../components/expandable/Expandable';
 import BaseLayout from '../../components/base-layout/BaseLayout';
-import QuestionTooltip from '../../components/QuestionTooltip/QuestionTooltip';
+import QuestionTooltip from '../../components/question-tooltip/QuestionTooltip';
 import {useAppSelector} from '../../redux/hooks/useAppSelector';
 import {colors} from '../../styles/colors';
 import {typography} from '../../styles/typography';
