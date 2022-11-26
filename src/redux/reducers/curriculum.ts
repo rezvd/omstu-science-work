@@ -28,7 +28,7 @@ export const exampleState: CurriculumState = {
 
 export type CurriculumActions = UpdateCurriculumActionResponse;
 
-export default (state = initState, action: CurriculumActions): CurriculumState => {
+export default (state = exampleState, action: CurriculumActions): CurriculumState => {
   switch (action.type) {
     case UPDATE_CURRICULUM_STATE: {
       return {...state, ...action.payload};
